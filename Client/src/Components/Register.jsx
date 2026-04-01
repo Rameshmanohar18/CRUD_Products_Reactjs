@@ -1,9 +1,9 @@
-
 import { useDispatch } from "react-redux";
-import { register } from "../Feautures/Auth/authSlice";
+import { register } from "../Features/Auth/authSlice.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -84,7 +84,9 @@ export default function Register() {
     const { ...userData } = form;
 
     dispatch(register(userData));
+    console.log("🐷 dispatch", dispatch);
     console.log("🥘 userData", userData);
+    console.log("Submitting...");
 
     toast.info("Account created successfully 🎉");
 
@@ -170,6 +172,7 @@ export default function Register() {
         <p className="terms">
           By creating an account, you agree to our Conditions of Use and Privacy Notice.
         </p>
+        <p>Already have an account? <Link to ="/login">   Login here </Link>  </p>
       </form>
     </div>
   );

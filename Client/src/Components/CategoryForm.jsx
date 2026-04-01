@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { addCategory } from "../Feautures/Categories/CategorySlice.js"
+import { addCategory } from "../Features/Categories/CategorySlice.js"
 import { useState } from "react"
 
 export default function CategoryForm(){

@@ -1,5 +1,5 @@
 import { useSelector , useDispatch} from "react-redux"
-import { logout } from "../Feautures/Auth/authSlice"
+import { logout } from "../Features/Auth/authSlice.js"
 import { useNavigate } from "react-router-dom"
 
 export default function Dashboard(){

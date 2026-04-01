@@ -155,7 +155,7 @@ import {
   deleteProduct,
   updateProduct,
   fetchProducts
-} from "../Feautures/Products/ProductSlice";
+} from "../Features/Products/ProductSlice.js";
 
 import { useState, useEffect } from "react";
 

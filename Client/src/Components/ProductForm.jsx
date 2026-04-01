@@ -303,7 +303,7 @@
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../Feautures/Products/ProductSlice";
+import { addProduct } from "../Features/Products/ProductSlice.js";
 import { useState } from "react";
 
 export default function ProductForm() {
