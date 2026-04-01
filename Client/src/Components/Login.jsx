@@ -1,56 +1,5 @@
-// import { useDispatch, useSelector } from "react-redux"
-// import { login } from "../Feautures/Auth/authSlice"
-// import { useState, useEffect } from "react"
-// import { useNavigate } from "react-router-dom"
-// import "../Feautures/Auth/authSlice.js"
-
-// export default function Login(){
-
-//   const dispatch = useDispatch()
-//   const navigate = useNavigate()
-
-//   const user = useSelector(state => state.auth.user)
-
-//   const [form, setForm] = useState({
-//     email: "",
-//     password: ""
-//   })
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     dispatch(login(form))
-//   }
-
-//   // ✅ Listen for user change
-//   useEffect(() => {
-//     if(user){
-//       navigate("/dashboard")
-//     }
-//   }, [user, navigate])
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <h2>Login</h2>
-
-//       <input
-//         placeholder="Email"
-//         value={form.email}
-//         onChange={(e)=>setForm({...form,email:e.target.value})}
-//       />
-
-//       <input
-//         type="password"
-//         placeholder="Password"
-//         value={form.password}
-//         onChange={(e)=>setForm({...form,password:e.target.value})}
-//       />
-
-//       <button className="btn btn-primary" type="submit">Login</button>
-//     </form>
-//   )
-// }
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../Feautures/Auth/authSlice";
+import {register, loginUser } from "../Feautures/Auth/authSlice";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -86,7 +35,7 @@ export default function Login() {
       return;
     }
 
-    dispatch(login(form));
+    dispatch(loginUser(form));
   };
 
   // ✅ Listen for login success

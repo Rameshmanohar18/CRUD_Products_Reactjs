@@ -26,7 +26,7 @@ export default function Register() {
   // ✅ Regex rules
   const regex = {
     name: /^[A-Za-z ]{3,30}$/,
-    username: /^[a-zA-Z0-9_]{4,15}$/,
+    username: /^[a-zA-Z0-9_]{4,25}$/,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     password: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/
   };
