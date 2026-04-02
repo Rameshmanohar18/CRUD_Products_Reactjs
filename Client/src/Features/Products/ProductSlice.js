@@ -46,24 +46,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = "http://localhost:5000/api/products";
+const API = "http://localhost:5000/api/products"; 
 
 
-// =============================
 // CREATE PRODUCT
-// =============================
 export const addProduct = createAsyncThunk(
   "products/addProduct",
   async (product) => {
+    console.log("🐿️ product", product);
+
     const res = await axios.post(API, product);
     return res.data;
   }
 );
 
 
-// =============================
 // GET ALL PRODUCTS
-// =============================
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
@@ -73,9 +71,7 @@ export const fetchProducts = createAsyncThunk(
 );
 
 
-// =============================
 // GET SINGLE PRODUCT
-// =============================
 export const fetchProductById = createAsyncThunk(
   "products/fetchProductById",
   async (id) => {
@@ -85,9 +81,7 @@ export const fetchProductById = createAsyncThunk(
 );
 
 
-// =============================
 // UPDATE PRODUCT
-// =============================
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({ id, product }) => {
@@ -97,9 +91,7 @@ export const updateProduct = createAsyncThunk(
 );
 
 
-// =============================
 // DELETE PRODUCT
-// =============================
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id) => {
@@ -109,9 +101,7 @@ export const deleteProduct = createAsyncThunk(
 );
 
 
-// =============================
 // SLICE
-// =============================
 const productSlice = createSlice({
   name: "products",
 

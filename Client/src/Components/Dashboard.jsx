@@ -1,6 +1,8 @@
 import { useSelector , useDispatch} from "react-redux"
 import { logout } from "../Features/Auth/authSlice.js"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify";
+
 
 export default function Dashboard(){
 
@@ -18,10 +20,11 @@ export default function Dashboard(){
   
 
   return (
+<>
+
 
  <div className="dashboard-container">
 
-      {/* ✅ HEADER FIX */}
       <div
         style={{
           display: "flex",
@@ -29,8 +32,9 @@ export default function Dashboard(){
           alignItems: "center"
         }}
       >
-        <h1 className="display-flex align-items-center dashboard-title">Admin Dashboard</h1>
 
+        
+        <h1 className="display-flex align-items-center dashboard-title">Admin Dashboard</h1>
         <button
           onClick={handleLogout}
           style={{
@@ -40,29 +44,30 @@ export default function Dashboard(){
             border: "none",
             cursor: "pointer",
             borderRadius: "6px",
-            
           }}
         >
           Logout
         </button>
+        
       </div>
 
       {/* 📊 CARDS */}
       <div className="dashboard-cards">
-
         <div className="stat-card category-card">
           <p>Total Categories</p>
           <h2>{categories.length}</h2>
         </div>
-
         <div className="stat-card product-card">
           <p>Total Products</p>
           <h2>{products.items.length}</h2>
         </div>
-
       </div>
-
     </div>
+
+</>
+
+
+
 
   )
 }

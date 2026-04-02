@@ -8,7 +8,6 @@ const API = "http://localhost:5000/api/auth";
 
 export const register = createAsyncThunk(
   "auth/register",
-
   // console.log("Thunk started")
   async (userData, thunkAPI) => {
     try {

@@ -43,10 +43,19 @@ const Product = require("../models/productModel");
 // ===============================
 // CREATE PRODUCT
 // ===============================   
-exports.createProduct = async (req, res) => {       
+exports.createProduct = async (req, res) => { 
+  
+  console.log("CreateProduct API Hitting")
+  console.log(req.body);     
+   
+
+               
   try {
     const { name, price, stock, categoryId } = req.body;
 
+
+    console.log(req.body);
+    
     const product = await Product.create({
       name,
       price,

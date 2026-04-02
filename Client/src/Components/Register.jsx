@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
+
+
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -75,7 +77,6 @@ export default function Register() {
   // ✅ Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!validate(form)) {
       toast.error("Fix errors before submitting ❌");
       return;
