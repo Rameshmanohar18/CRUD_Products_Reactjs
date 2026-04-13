@@ -421,7 +421,6 @@ export default function ProductForm() {
       categoryId: form.categoryId   // ✅ must be _id
     }));
 
-    console.log("🦜 addProduct", addProduct);
 
     setForm({
       name: "",

@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 export default function Dashboard(){
 
   const categories = useSelector(state => state.categories)
+  console.log("🍅 categories", categories);
+
   const products = useSelector(state => state.products)
   console.log("🔥 products", products.items.length);
 

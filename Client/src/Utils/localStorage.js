@@ -4,5 +4,8 @@ export const loadState = (key) => {
 }
 
 export const saveState = (key, data) => {
+  console.log("🍪 key", key);
+  console.log("🦀 data", data);
+
   localStorage.setItem(key, JSON.stringify(data))
 }
