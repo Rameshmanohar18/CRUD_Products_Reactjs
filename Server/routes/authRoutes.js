@@ -1,23 +1,16 @@
-// const express = require("express");
-// const router = express.Router();
-// const { registerUser } = require("../controller/userController");
-
-// router.post("/register", registerUser);
-
-// module.exports = router;    
-
-
 const express = require("express");
 const router = express.Router();
 
 const {
   register,
-  login
+  login,
+  verifyOTP,
+  resendOTP
 } = require("../controller/authController");
-
-console.log("Auth Routes Loaded");
 
 router.post("/register", register);
 router.post("/login", login);
-                  
+router.post("/verify-otp", verifyOTP);
+router.post("/resend-otp", resendOTP);
+
 module.exports = router;

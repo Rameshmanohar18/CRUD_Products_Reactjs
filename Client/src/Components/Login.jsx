@@ -3,32 +3,34 @@ import { loginUser } from "../Features/Auth/authSlice.js";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.auth.user);
+  const { otpSent, loading, error } = useSelector((state) => state.auth);
 
-  const [form, setForm] = useState({
-    email: "",
-    password: ""
-  });
-
-  const [isValid, setIsValid] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
 
-  // ✅ Simple validation
+  const isValid = form.email && form.password.length >= 6;
+
+  // After login step 1 succeeds → go to OTP page
   useEffect(() => {
-    if (form.email && form.password.length >= 6) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
+    if (otpSent) {
+      toast.info("OTP sent to your email 📧", {
+        position: "top-center",
+        autoClose: 2000
+      });
+      navigate("/verify-otp");
     }
-  }, [form]);
+  }, [otpSent, navigate]);
 
-
-
+  // Show backend error
+  useEffect(() => {
+    if (error) toast.error(error, { position: "top-center" });
+  }, [error]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,21 +40,6 @@ export default function Login() {
     }
     dispatch(loginUser(form));
   };
-
-  // ✅ Listen for login success
-  useEffect(() => {
-    if (user) {
-      toast.success("You Logged Successfully🎉",{
-  position: "top-center",
-  autoClose: 1000,
-      }   ),  {
-      
-      };
-      // setTimeout(() => {
-        navigate("/dashboard");
-      // }, 2500);
-    }
-  }, [user, navigate]);
 
   return (
     <div className="amazon-container">
@@ -65,9 +52,7 @@ export default function Login() {
           type="email"
           placeholder="Enter your email"
           value={form.email}
-          onChange={(e) =>
-            setForm({ ...form, email: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
 
         {/* PASSWORD */}
@@ -77,24 +62,25 @@ export default function Login() {
             type={showPassword ? "text" : "password"}
             placeholder="Enter password"
             value={form.password}
-            onChange={(e) =>
-              setForm({ ...form, password: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
           <span onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? "🙈" : "👁️"}
           </span>
         </div>
 
-        <button type="submit" disabled={!isValid}>
-          Sign-In
+        <button type="submit" disabled={!isValid || loading}>
+          {loading ? "Sending OTP..." : "Sign-In"}
         </button>
 
         <p className="terms">
-          By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.
+          By continuing, you agree to our Conditions of Use and Privacy Notice.
         </p>
-        
 
+        <p style={{ marginTop: "12px", fontSize: "13px", color: "#94a3b8" }}>
+          Don't have an account?{" "}
+          <Link to="/" style={{ color: "#6366f1" }}>Register here</Link>
+        </p>
       </form>
     </div>
   );

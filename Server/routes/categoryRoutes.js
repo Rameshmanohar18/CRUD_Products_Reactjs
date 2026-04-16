@@ -1,27 +1,13 @@
-// const express = require("express");
-// const router = express.Router();
-// const controller = require("../controller/categoryController");
+const express = require("express");
+const router = express.Router();
+const controller = require("../controller/categoryController");
+const protect = require("../middleware/authMiddleware");
 
-// router.post("/", controller.createCategory);
-// router.get("/", controller.getCategories);
-// router.delete("/:id", controller.deleteCategory);
+// All routes below require a valid JWT
+router.use(protect);
 
-// module.exports = router;
-// import express from "express";
-// import {
-//   createCategory,
-//   getCategories,
-//   deleteCategory
-// } from "../controller/categoryController";
-
-   
-const express = require("express");       
-const controller  = require("../controller/categoryController")
-   
-const router = express.Router();    
-
-router.post("/", controller.createCategory  ); 
-router.get("/", controller.getCategories );
+router.post("/", controller.createCategory);
+router.get("/", controller.getCategories);
 router.delete("/:id", controller.deleteCategory);
 
 module.exports = router;

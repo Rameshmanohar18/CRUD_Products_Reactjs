@@ -1,44 +1,52 @@
-// import Category from "../models/categoryModel";
-
-// export const createCategory = async (req, res) => {
-//   const category = await Category.create(req.body);
-//   res.json(category);
-// };
-
-// export const getCategories = async (req, res) => {
-//   const categories = await Category.find();
-//   res.json(categories);
-// };
-
-// export const deleteCategory = async (req, res) => {
-//   await Category.findByIdAndDelete(req.params.id);
-//   res.json({ message: "Deleted" });
-// };
-
 const Category = require("../models/categoryModel");
 
+// ===============================
+// CREATE CATEGORY
+// ===============================
 exports.createCategory = async (req, res) => {
   try {
-    const category = await Category.create(req.body);
+    const category = await Category.create({
+      name: req.body.name,
+      user: req.user.id        // ← attach owner
+    });
+
     res.status(201).json(category);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
+// ===============================
+// GET ALL CATEGORIES (only owner's)
+// ===============================
 exports.getCategories = async (req, res) => {
   try {
-    const categories = await Category.find();
+    const categories = await Category.find({ user: req.user.id }); // ← filter by owner
+
     res.json(categories);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
+// ===============================
+// DELETE CATEGORY
+// ===============================
 exports.deleteCategory = async (req, res) => {
   try {
-    await Category.findByIdAndDelete(req.params.id);
+    const category = await Category.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user.id        // ← ownership check
+    });
+
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
     res.json({ message: "Deleted" });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
